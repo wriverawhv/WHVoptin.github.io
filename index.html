@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JNL Quantum Wireless Call Alarm SMS Opt-In</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .info-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        
+        .info-box h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .info-box ul {
+            list-style-position: inside;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .info-box li {
+            margin-bottom: 8px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        input[type="tel"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+        
+        input[type="tel"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+        
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 4px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        
+        .checkbox-text {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .checkbox-text a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .checkbox-text a:hover {
+            text-decoration: underline;
+        }
+        
+        .disclosure {
+            background: #fff9e6;
+            border: 1px solid #ffd700;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .cta-button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .cta-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .cta-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .privacy-notice {
+            color: #999;
+            font-size: 12px;
+            text-align: center;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+        
+        .success-message {
+            display: none;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .error-message {
+            display: none;
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>JNL Quantum Wireless Call Alarm Notifications</h1>
+        <p class="subtitle">Opt-in to receive SMS alerts for resident call alarms</p>
+        
+        <div class="info-box">
+            <h3>📱 What You'll Receive</h3>
+            <ul>
+                <li>SMS alerts from the JNL Quantum Wireless Call System</li>
+                <li>Approximately 5–20 text messages per day</li>
+                <li>Secure, encrypted notifications</li>
+                <li>Alerts from nurse call stations, resident call buttons, and system events</li>
+            </ul>
+        </div>
+        
+        <div id="successMessage" class="success-message">
+            ✓ Thank you! Your opt-in request has been submitted successfully.
+        </div>
+        
+        <div id="errorMessage" class="error-message">
+            ✗ An error occurred. Please try again.
+        </div>
+        
+        <form id="optinForm">
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number *</label>
+                <input 
+                    type="tel" 
+                    id="phoneNumber" 
+                    name="phoneNumber" 
+                    placeholder="+1 (555) 123-4567"
+                    required
+                    pattern="[0-9\-\+\(\)\s]+"
+                >
+            </div>
+            
+            <div class="disclosure">
+                <strong>📢 Disclosure:</strong> Standard message and data rates may apply. Check with your wireless carrier for details.
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="consentCheckbox" name="consent" required>
+                <label for="consentCheckbox" class="checkbox-text">
+                    I consent to receive recurring SMS messages related to resident call alarm notifications from the JNL Quantum Wireless Call System, managed by B&B Integrations. I understand that message and data rates may apply. By checking this box, I confirm that I am the owner or authorized user of the mobile number provided.
+                </label>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="privacyCheckbox" name="privacyAgreement" required>
+                <label for="privacyCheckbox" class="checkbox-text">
+                    I have read and agree to the <a href="privacy-policy.html" target="_blank">Privacy Policy</a> and <a href="terms-conditions.html" target="_blank">Terms & Conditions</a>.
+                </label>
+            </div>
+            
+            <button type="submit" class="cta-button">Sign Up for SMS Alerts</button>
+        </form>
+        
+        <div class="privacy-notice">
+            <strong>Your Privacy:</strong> Your phone number will remain confidential and be used exclusively for JNL Quantum notifications. It will not be shared or sold.<br><br>
+            <strong>Opt-Out:</strong> Reply STOP to any message to unsubscribe at any time.<br>
+            <strong>Help:</strong> Reply HELP for assistance.
+        </div>
+    </div>
+    
+    <script>
+        const form = document.getElementById('optinForm');
+        const phoneInput = document.getElementById('phoneNumber');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const phoneNumber = phoneInput.value.trim();
+            const consent = document.getElementById('consentCheckbox').checked;
+            const privacyAgreement = document.getElementById('privacyCheckbox').checked;
+            
+            if (!phoneNumber || !consent || !privacyAgreement) {
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+                return;
+            }
+            
+            try {
+                // Format phone number (remove non-digits)
+                const cleanedPhone = phoneNumber.replace(/\D/g, '');
+                
+                if (cleanedPhone.length < 10) {
+                    errorMessage.textContent = '✗ Please enter a valid phone number.';
+                    errorMessage.style.display = 'block';
+                    successMessage.style.display = 'none';
+                    return;
+                }
+                
+                // Here you would send the data to your backend/SMS service
+                console.log('Opt-in submitted:', {
+                    phoneNumber: cleanedPhone,
+                    timestamp: new Date().toISOString(),
+                    consent,
+                    privacyAgreement
+                });
+                
+                // Show success message
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+                
+                // Reset form
+                form.reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
+                
+            } catch (error) {
+                errorMessage.textContent = '✗ An error occurred. Please try again.';
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+            }
+        });
+        
+        // Hide error message on input
+        phoneInput.addEventListener('focus', () => {
+            errorMessage.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
